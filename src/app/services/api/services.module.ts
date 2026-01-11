@@ -8,11 +8,14 @@ import { CreateServiceUseCase } from '../application/use-case/create-service.use
 import { FindServiceUseCase } from '../application/use-case/find-service.use-case';
 import { FindServicePrivateUseCase } from '../application/use-case/find-service-private.use-case';
 import { UpdateServiceUseCase } from '../application/use-case/update-service.use-case';
+import { JsonWebTModule } from 'src/lib/json-web-t/json-web-t.module';
+import { AuthGuardGuard } from 'src/guard/auth-guard/auth-guard.guard';
 
 @Module({
   controllers: [ServicesController],
   imports: [
     MongooseModule.forFeature([{ name: Service.name, schema: ServiceSchema }]),
+    JsonWebTModule,
   ],
   providers: [
     {
@@ -23,6 +26,7 @@ import { UpdateServiceUseCase } from '../application/use-case/update-service.use
     FindServiceUseCase,
     FindServicePrivateUseCase,
     UpdateServiceUseCase,
+    AuthGuardGuard,
   ],
 })
 export class ServicesModule {}

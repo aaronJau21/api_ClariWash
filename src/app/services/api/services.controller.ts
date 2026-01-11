@@ -1,10 +1,19 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { CreateServiceUseCase } from '../application/use-case/create-service.use-case';
 import { CreateServiceDto } from '../application/dto/request/create-service.dto';
 import { FindServiceUseCase } from '../application/use-case/find-service.use-case';
 import { FindServicePrivateUseCase } from '../application/use-case/find-service-private.use-case';
 import { UpdateServiceDto } from '../application/dto/request/update-service.dto';
 import { UpdateServiceUseCase } from '../application/use-case/update-service.use-case';
+import { AuthGuardGuard } from 'src/guard/auth-guard/auth-guard.guard';
 
 @Controller('services')
 export class ServicesController {
@@ -21,6 +30,7 @@ export class ServicesController {
     return 'Servicio creado correctamente';
   }
 
+  @UseGuards(AuthGuardGuard)
   @Get('public')
   async findServices() {
     return await this.findServiceUseCase.execute();
