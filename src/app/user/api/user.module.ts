@@ -20,5 +20,6 @@ import { UserRepositoryMongo } from '../infrastructure/repository/mongo/user-rep
     },
     CreateUserUseCase,
   ],
+  exports: [USER_REPOSITORY],
 })
 export class UserModule {}
