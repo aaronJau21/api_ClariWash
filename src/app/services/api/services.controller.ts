@@ -24,23 +24,25 @@ export class ServicesController {
     private readonly updateServiceUseCase: UpdateServiceUseCase,
   ) {}
 
+  @UseGuards(AuthGuardGuard)
   @Post()
   async createService(@Body() createServiceDto: CreateServiceDto) {
     await this.createServiceUseCase.execute(createServiceDto);
     return 'Servicio creado correctamente';
   }
 
-  @UseGuards(AuthGuardGuard)
   @Get('public')
   async findServices() {
     return await this.findServiceUseCase.execute();
   }
 
+  @UseGuards(AuthGuardGuard)
   @Get()
   async findServicesPrivate() {
     return await this.findServicePrivateUseCase.execute();
   }
 
+  @UseGuards(AuthGuardGuard)
   @Put(':id')
   async updateService(
     @Param('id') id: string,

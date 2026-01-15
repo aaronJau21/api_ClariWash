@@ -19,6 +19,7 @@ export class AuthController {
       sameSite: 'lax',
       secure: process.env.NODE_ENV === 'production',
       maxAge: 1 * 60 * 1000,
+      path: '/',
     });
 
     return { msg };
