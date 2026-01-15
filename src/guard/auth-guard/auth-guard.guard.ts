@@ -4,12 +4,8 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Request } from 'express';
 import { JsonWebTService } from 'src/lib/json-web-t/json-web-t.service';
-
-interface AuthenticatedRequest extends Request {
-  user?: { id: string; email: string; name: string };
-}
+import { AuthenticatedRequest } from 'src/shared/types/request.types';
 
 @Injectable()
 export class AuthGuardGuard implements CanActivate {

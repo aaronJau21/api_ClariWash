@@ -1,7 +1,17 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { LoginUseCase } from '../application/use-case/login.use-case';
 import { LoginDto } from '../application/dto/request/login.dto';
 import { type Response } from 'express';
+import { AuthGuardGuard } from 'src/guard/auth-guard/auth-guard.guard';
+import { type AuthenticatedRequest } from 'src/shared/types/request.types';
 
 @Controller('auth')
 export class AuthController {
@@ -23,5 +33,11 @@ export class AuthController {
     });
 
     return { msg };
+  }
+
+  @UseGuards(AuthGuardGuard)
+  @Get('me')
+  me(@Req() req: AuthenticatedRequest) {
+    return req.user;
   }
 }
