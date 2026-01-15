@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 
 import cookieParser from 'cookie-parser';
+import { Request, Response, NextFunction } from 'express';
 import { ExceptionPublicMiddleware } from './middleware/exception-public/exception-public.middleware';
 
 async function bootstrap() {
@@ -22,7 +23,11 @@ async function bootstrap() {
 
   app.use(cookieParser());
 
-  app.use(ExceptionPublicMiddleware);
+  // Middleware para eliminar cookies en rutas públicas
+  const exceptionPublicMiddleware = new ExceptionPublicMiddleware();
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    exceptionPublicMiddleware.use(req, res, next);
+  });
 
   await app.listen(process.env.PORT ?? 3000);
 }

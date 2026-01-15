@@ -5,8 +5,11 @@ import { NextFunction, Request, Response } from 'express';
 export class ExceptionPublicMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     if (req.path.includes('/public')) {
+      // Eliminar cookies del request
       req.cookies = {};
-      req.headers = {};
+      req.signedCookies = {};
+      // Eliminar el header cookie si existe
+      delete req.headers.cookie;
     }
     next();
   }
