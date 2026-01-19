@@ -7,6 +7,8 @@ import { HashModule } from './lib/hash/hash.module';
 import { AuthModule } from './app/auth/api/auth.module';
 import { JsonWebTModule } from './lib/json-web-t/json-web-t.module';
 import { JwtModule } from '@nestjs/jwt';
+import { WashingModule } from './app/washing/api/washing.module';
+import { ClientModule } from './app/client/api/client.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { JwtModule } from '@nestjs/jwt';
     AuthModule,
     JsonWebTModule,
     JwtModule,
+    WashingModule,
+    ClientModule,
   ],
 })
 export class AppModule {}

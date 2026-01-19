@@ -1,6 +1,6 @@
-import { GlobalRepository } from 'src/shared/repository/global-repository.interface';
-import { Service } from '../entities/service.entity';
+import { Service } from '../entities/service.entity'
 import { CreateServiceDto } from '../../application/dto/request/create-service.dto';
+import { GlobalRepository } from 'src/shared/repository/global-repository.interface';
 
 export const SERVICE_REPOSITORY = 'SERVICE_REPOSITORY';
 
